@@ -1,0 +1,30 @@
+{
+    "name": "ichat-backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/amiof/ichat-backend.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/amiof/ichat-backend/issues"
+    },
+    "homepage": "https://github.com/amiof/ichat-backend#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "http-errors": "^2.0.0",
+        "mongoose": "^6.9.2",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.20"
+    }
+}
