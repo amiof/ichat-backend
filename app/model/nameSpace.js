@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const namespaceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    pic: { type: String, required: true },
+    pic: { type: String },
     title: { type: String, required: true },
     rooms: { type: [mongoose.Types.ObjectId], default: [] },
   },

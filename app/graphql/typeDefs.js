@@ -5,7 +5,7 @@ const typeDefs = gql`
     data: String
     nameSpaces: [nameSpace]
     rooms: [room]
-    users: [user]
+    users(username: String, id: ID, phoneNumber: String): [user]
   }
   type nameSpace {
     id: ID
@@ -42,6 +42,8 @@ const typeDefs = gql`
   type Mutation {
     data(server: String): String
     createUser(username: String, password: String, phoneNumber: String): user
+    createNamespace(name: String, title: String): nameSpace
+    createRoom(name: String, title: String, endPoint: String, description: String): room
   }
 `;
 export default typeDefs;
