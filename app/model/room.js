@@ -7,7 +7,7 @@ const roomSchema = new mongoose.Schema(
     title: { type: String, required: true },
     endPonit: { type: String, required: true },
     description: { type: String },
-    message: { type: [messageSchema], default: [] },
+    messages: { type: [messageSchema], default: [] },
   },
   { timestamps: true }
 );
