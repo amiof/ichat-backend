@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { namespaceSchema } from "./nameSpace";
-import { roomSchema } from "./room";
+import { namespaceSchema } from "./nameSpace.js";
+import { roomSchema } from "./room.js";
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     rooms: { type: [roomSchema], default: [] },
-    namespace: { type: [namespaceSchema], defulet: [] },
+    namespace: { type: [namespaceSchema], default: [] },
   },
   { timestamps: true }
 );
