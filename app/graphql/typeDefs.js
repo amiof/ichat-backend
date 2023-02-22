@@ -37,8 +37,11 @@ const typeDefs = gql`
     phoneNumber: String
   }
 
+  #-------------- mutations queries
+
   type Mutation {
     data(server: String): String
+    createUser(username: String, password: String, phoneNumber: String): user
   }
 `;
 export default typeDefs;
