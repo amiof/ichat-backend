@@ -4,5 +4,8 @@ const typeDefs = gql`
   type Query {
     data: String
   }
+  type Mutation {
+    data: String
+  }
 `;
 export default typeDefs;

@@ -1,8 +1,15 @@
 export const resolvers = {
+  //Qureries
   Query: {
     data: () => {
       return "hi";
     },
   },
-  // Mutation: {},
+  // Mutations,
+  Mutation: {
+    data: (parent, arg) => {
+      console.log(arg);
+      return "mutation hi";
+    },
+  },
 };
