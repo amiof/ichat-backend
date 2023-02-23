@@ -1,3 +1,4 @@
+import { UserInputError } from "apollo-server-express";
 import { nameSpaceModel } from "../../model/nameSpace.js";
 import { roomModel } from "../../model/room.js";
 import { userModel } from "../../model/userModel.js";
@@ -5,13 +6,13 @@ import { userValidationSchema } from "../../validation/userValidation.js";
 
 export const Mutation = {
   createUser: async (parent, arg) => {
-    const validate = userValidationSchema.validate({ ...arg });
+    const { value, error } = userValidationSchema.validate({ ...arg }, { abortEarly: false });
     // console.log(validate);
     // console.log(arg);
-    if (validate.error) {
-      const error = validate.error;
-      console.log(error);
-      return { message: error };
+    if (error) {
+      throw new UserInputError("INPUT ERROR", {
+        validationError: error.details,
+      });
     }
     const user = await userModel.create({ ...arg });
 

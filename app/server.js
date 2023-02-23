@@ -9,6 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { resolvers } from "./graphql/resolver.js";
 import typeDefs from "./graphql/typeDefs.js";
+import { Server } from "socket.io";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -55,9 +56,15 @@ class application {
   }
   createServer(port) {
     try {
-      app.listen({ port }, (error) => {
+      const server = app.listen({ port }, (error) => {
         if (!error) return log("server is up in http://localhost:3500");
         return log(error);
+      });
+      const io = new Server(server, {
+        cors: {
+          origin: "*",
+        },
+        serveClient: true,
       });
     } catch (error) {
       log(error);
