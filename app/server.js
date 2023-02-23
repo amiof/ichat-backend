@@ -45,6 +45,7 @@ class application {
       const apolloServer = new ApolloServer({
         typeDefs: typeDefs,
         resolvers: resolvers,
+        resolverValidationOptions: { requireResolversForResolveType: false },
       });
       await apolloServer.start();
       apolloServer.applyMiddleware({ app });

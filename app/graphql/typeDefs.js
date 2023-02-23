@@ -36,12 +36,33 @@ const typeDefs = gql`
     nameSpace: [ID]
     phoneNumber: String
   }
+  type BaseError {
+    message: String!
+  }
 
-  #-------------- mutations queries
+  type InvalidInputError {
+    message: String!
+  }
+
+  type NotFoundError {
+    message: String!
+  }
+
+  type UnknownError {
+    message: String!
+  }
+
+  type NotAllowedError {
+    message: String!
+  }
+  # union userOrError = user | NotFoundError | NotAllowedError | InvalidInputError | UnknownError
+  union userOrError = user | NotFoundError
+
+  # #-------------- mutations queries
 
   type Mutation {
     data(server: String): String
-    createUser(username: String, password: String, phoneNumber: String): user
+    createUser(username: String, password: String, phoneNumber: String): userOrError!
     createNamespace(name: String, title: String): nameSpace
     createRoom(name: String, title: String, endPoint: String, description: String): room
   }
