@@ -11,6 +11,7 @@ import { resolvers } from "./graphql/resolver.js";
 import typeDefs from "./graphql/typeDefs.js";
 import { Server } from "socket.io";
 import { allroutes } from "./routes/routes.js";
+import createHttpError from "http-errors";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -81,6 +82,19 @@ class application {
   router() {
     app.use(allroutes);
   }
-  errorHandler() {}
+  errorHandler() {
+    app.use((req, res, next) => {
+      next(createHttpError.NotFound("your page is not found Error-404"));
+    });
+    app.use((error, req, res, next) => {
+      const serverError = createHttpError.InternalServerError();
+      const statusCode = error.status | serverError.status | 500;
+      const message = error.message | serverError.message | "internal server Error";
+      return res.status(statusCode).json({
+        statusCode,
+        message,
+      });
+    });
+  }
 }
 export { application };
