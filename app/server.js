@@ -23,6 +23,7 @@ class application {
     this.serverConfig();
     this.apolloServerCreate();
     this.createServer(this.#port);
+    this.creatSoketIoServer();
     this.DataBaseConnect(this.#address);
     this.router();
     this.errorHandler();
@@ -60,15 +61,21 @@ class application {
         if (!error) return log("server is up in http://localhost:3500");
         return log(error);
       });
+      return server;
+    } catch (error) {
+      log(error);
+    }
+  }
+  creatSoketIoServer() {
+    try {
+      const server = this.createServer();
       const io = new Server(server, {
         cors: {
           origin: "*",
         },
         serveClient: true,
       });
-    } catch (error) {
-      log(error);
-    }
+    } catch (error) {}
   }
   router() {
     app.get("/", (req, res, next) => {
