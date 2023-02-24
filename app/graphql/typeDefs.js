@@ -35,6 +35,8 @@ const typeDefs = gql`
     rooms: [ID]
     nameSpace: [ID]
     phoneNumber: String
+    token: String
+    refreshToken: String
   }
   type BaseError {
     message: String!

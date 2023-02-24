@@ -28,7 +28,7 @@ class application {
     this.creatSoketIoServer();
     this.DataBaseConnect(this.#address);
     this.router();
-    this.errorHandler();
+    // this.errorHandler();
   }
   serverConfig() {
     app.use(express.urlencoded({ extended: true }));
@@ -52,7 +52,7 @@ class application {
         resolverValidationOptions: { requireResolversForResolveType: false },
       });
       await apolloServer.start();
-      apolloServer.applyMiddleware({ app });
+      apolloServer.applyMiddleware({ app, path: "/graphql" });
     } catch (error) {
       log(error);
     }
