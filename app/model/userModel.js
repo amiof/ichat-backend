@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema(
     phoneNumber: { type: String, required: true },
     rooms: { type: [roomSchema], default: [] },
     namespace: { type: [namespaceSchema], default: [] },
+    token: { type: String, default: "" },
+    refreshToken: { type: String, default: "" },
   },
   { timestamps: true }
 );

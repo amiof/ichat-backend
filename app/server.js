@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import { resolvers } from "./graphql/resolver.js";
 import typeDefs from "./graphql/typeDefs.js";
 import { Server } from "socket.io";
+import { allroutes } from "./routes/routes.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -78,11 +79,7 @@ class application {
     } catch (error) {}
   }
   router() {
-    app.get("/", (req, res, next) => {
-      res.json({
-        message: "hi there",
-      });
-    });
+    app.use(allroutes);
   }
   errorHandler() {}
 }
