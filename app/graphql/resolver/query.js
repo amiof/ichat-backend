@@ -21,7 +21,11 @@ export let Query = {
     const nameSpaces = await nameSpaceModel.find({});
     return nameSpaces;
   },
-  rooms: async () => {
+  rooms: async (_, arg) => {
+    if (arg) {
+      const room = await roomModel.find({ ...arg });
+      return room;
+    }
     const rooms = await roomModel.find({});
     return rooms;
   },

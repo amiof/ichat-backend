@@ -5,7 +5,7 @@ const roomSchema = new mongoose.Schema(
     name: { type: String, required: true },
     pic: { type: String },
     title: { type: String, required: true },
-    endPonit: { type: String, required: true },
+    endPoint: { type: String, required: true },
     description: { type: String },
     messages: { type: [messageSchema], default: [] },
   },
