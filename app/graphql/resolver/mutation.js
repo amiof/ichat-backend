@@ -47,7 +47,13 @@ export const Mutation = {
     const { username, endPoint } = arg;
     const checkUsername = await checkAvailableInDataBase({ username }, userModel);
     const checkEndPoint = await checkAvailableInDataBase({ endPoint }, roomModel);
-
+    const checkAddedBefore = await userModel.find({
+      username,
+      rooms: { $elemMatch: { endPoint } },
+    });
+    if (checkAddedBefore.length > 0) {
+      return new UserInputError("this user before added to this room");
+    }
     if (checkUsername && checkEndPoint) {
       const test = checkUsername[0].rooms[0]?.name
         ? [...checkUsername[0].rooms, ...checkEndPoint]
