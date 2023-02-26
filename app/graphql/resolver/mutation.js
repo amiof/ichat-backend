@@ -43,4 +43,21 @@ export const Mutation = {
     const Room = await roomModel.create({ ...arg });
     return Room;
   },
+  addUserInRoom: async (_, arg) => {
+    const { username, endPoint } = arg;
+    const checkUsername = await checkAvailableInDataBase({ username }, userModel);
+    const checkEndPoint = await checkAvailableInDataBase({ endPoint }, roomModel);
+
+    if (checkUsername && checkEndPoint) {
+      const test = checkUsername[0].rooms[0]?.name
+        ? [...checkUsername[0].rooms, ...checkEndPoint]
+        : checkEndPoint;
+      const updateUser = await userModel.updateOne({ username }, { $set: { rooms: test } });
+
+      const user = await checkAvailableInDataBase({ username }, userModel);
+
+      return user[0];
+    }
+    return new UserInputError("input Error");
+  },
 };

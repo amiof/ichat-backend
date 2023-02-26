@@ -3,10 +3,10 @@ import { messageSchema } from "./message.js";
 const roomSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    pic: { type: String },
+    pic: { type: String, default: "../pic/pic.jpg" },
     title: { type: String, required: true },
     endPoint: { type: String, required: true },
-    description: { type: String },
+    description: { type: String, default: "no description" },
     messages: { type: [messageSchema], default: [] },
   },
   { timestamps: true }
