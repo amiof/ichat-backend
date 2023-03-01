@@ -1,5 +1,6 @@
 import { log } from "console";
 import { ApolloServer } from "apollo-server-express";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import express from "express";
 // import http from "http";
 import mongoose from "mongoose";
@@ -50,6 +51,7 @@ class application {
         typeDefs: typeDefs,
         resolvers: resolvers,
         resolverValidationOptions: { requireResolversForResolveType: false },
+        plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
       });
       await apolloServer.start();
       apolloServer.applyMiddleware({ app, path: "/graphql" });

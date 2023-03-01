@@ -1,5 +1,5 @@
-import { UserInputError } from "apollo-server-express";
 import { nameSpaceModel } from "../../model/nameSpace.js";
+import { GraphQLError } from "graphql";
 import { roomModel } from "../../model/room.js";
 import { userModel } from "../../model/userModel.js";
 import { checkAvailableInDataBase, createToken, hashData } from "../../utils/utils.js";
@@ -10,7 +10,7 @@ export const Mutation = {
     const { value, error } = userValidationSchema.validate({ ...arg }, { abortEarly: false });
     const { username, password, phoneNumber } = value;
     if (error) {
-      throw new UserInputError("INPUT ERROR", {
+      throw new GraphQLError("INPUT ERROR", {
         validationError: error.details,
       });
     }
@@ -18,7 +18,7 @@ export const Mutation = {
     const checkPhoneNumber = await checkAvailableInDataBase({ phoneNumber }, userModel);
 
     if (checkuserName.username > 0 || checkPhoneNumber.length > 0) {
-      throw new UserInputError("this username or phoneNumber is available");
+      throw new GraphQLError("this username or phoneNumber is available");
     }
     const hashedPass = hashData(password);
     const token = createToken(username, "1d");
@@ -52,7 +52,7 @@ export const Mutation = {
       rooms: { $elemMatch: { endPoint } },
     });
     if (checkAddedBefore.length > 0) {
-      return new UserInputError("this user before added to this room");
+      return new GraphQLError("this user before added to this room");
     }
     if (checkUsername && checkEndPoint) {
       const test = checkUsername[0].rooms[0]?.name
@@ -64,6 +64,6 @@ export const Mutation = {
 
       return user[0];
     }
-    return new UserInputError("input Error");
+    return new GraphQLError("input Error");
   },
 };

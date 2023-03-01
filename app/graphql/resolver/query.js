@@ -7,7 +7,9 @@ export let Query = {
   },
   users: async (parent, arg) => {
     if (arg) {
+      const { password } = arg;
       const user = await userModel.find({ ...arg });
+      console.log(user);
       return user;
     }
     const users = await userModel.find({});

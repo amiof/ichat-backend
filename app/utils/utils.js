@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
 import { secretKey } from "../constants.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 dotenv.config({ path: "../../.env" });
 // dotenv.config()
 const createToken = (payload, Exp) => {
@@ -23,4 +23,9 @@ function hashData(payload) {
   return hashed;
 }
 
-export { createToken, checkAvailableInDataBase, hashData };
+function verifyHashed(pass, hashed) {
+  const data = bcrypt.compareSync(pass, hashed);
+  return data;
+}
+
+export { createToken, checkAvailableInDataBase, hashData, verifyHashed };
