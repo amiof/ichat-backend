@@ -4,6 +4,11 @@ import { roomModel } from "../../model/room.js";
 import { userModel } from "../../model/userModel.js";
 import { checkAvailableInDataBase, createToken, hashData } from "../../utils/utils.js";
 import { userValidationSchema } from "../../validation/userValidation.js";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const Mutation = {
   createUser: async (parent, arg) => {
@@ -65,5 +70,14 @@ export const Mutation = {
       return user[0];
     }
     return new GraphQLError("input Error");
+  },
+  addPhoto: async (_, { file }) => {
+    const { createReadStream, filename } = await file;
+    const location = path.join(__dirname, `../../../public/pic/${filename}`);
+    let myfile = createReadStream();
+    await myfile.pipe(fs.createWriteStream(location));
+    return {
+      url: `http:localhost/3500/pic/${filename}`,
+    };
   },
 };

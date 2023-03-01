@@ -1,3 +1,4 @@
+import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
 import { Mutation } from "./resolver/mutation.js";
 import { Query } from "./resolver/query.js";
 export const resolvers = {
@@ -13,6 +14,7 @@ export const resolvers = {
   //     return null;
   //   },
   // },
+  Upload: GraphQLUpload,
   Query: Query,
   Mutation: Mutation,
 };

@@ -1,4 +1,5 @@
 import { gql } from "apollo-server-express";
+import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
 
 const typeDefs = gql`
   type Query {
@@ -59,6 +60,10 @@ const typeDefs = gql`
   }
   # union userOrError = user | NotFoundError | NotAllowedError | InvalidInputError | UnknownError
   # union userOrError = user | NotFoundError
+  scalar Upload
+  type fieldUpload {
+    url: String
+  }
 
   # #-------------- mutations queries
 
@@ -67,6 +72,7 @@ const typeDefs = gql`
     createNamespace(name: String, title: String): nameSpace
     createRoom(name: String, title: String, endPoint: String, description: String): room
     addUserInRoom(username: String, endPoint: String): user
+    addPhoto(file: Upload!): fieldUpload
   }
 `;
 export default typeDefs;

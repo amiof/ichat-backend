@@ -13,6 +13,7 @@ import typeDefs from "./graphql/typeDefs.js";
 import { Server } from "socket.io";
 import { allroutes } from "./routes/routes.js";
 import createHttpError from "http-errors";
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -54,6 +55,7 @@ class application {
         plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
       });
       await apolloServer.start();
+      app.use(graphqlUploadExpress());
       apolloServer.applyMiddleware({ app, path: "/graphql" });
     } catch (error) {
       log(error);
