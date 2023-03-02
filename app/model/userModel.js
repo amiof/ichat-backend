@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
     username: { type: String, required: true },
     password: { type: String, required: true },
     phoneNumber: { type: String, required: true },
+    pic: { type: String, default: "http://localhost:3500/pic/eeg.webp" },
     rooms: { type: [roomSchema], default: [] },
     namespace: { type: [namespaceSchema], default: [] },
     token: { type: String, default: "" },

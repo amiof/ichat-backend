@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const namespaceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    pic: { type: String },
+    pic: { type: String, default: "http://localhost:3500/pic/eeg.webp" },
     title: { type: String, required: true },
     rooms: { type: [mongoose.Types.ObjectId], default: [] },
   },

@@ -34,6 +34,7 @@ const typeDefs = gql`
     username: String
     password: String
     rooms: [room]
+    pic: String
     nameSpace: [nameSpace]
     phoneNumber: String
     token: String
