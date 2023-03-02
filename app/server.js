@@ -33,11 +33,11 @@ class application {
     // this.errorHandler();
   }
   serverConfig() {
+    app.use(cors());
+    app.use(morgan("dev"));
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
-    app.use(morgan("dev"));
-    app.use(express.static(path.join(__dirname + ".." + "public")));
-    app.use(cors());
+    app.use(express.static(path.join(__dirname + "/.." + "/public")));
   }
   DataBaseConnect(address) {
     mongoose.set("strictQuery", false);
