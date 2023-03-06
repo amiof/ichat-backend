@@ -69,7 +69,7 @@ const typeDefs = gql`
   # #-------------- mutations queries
 
   type Mutation {
-    createUser(username: String, password: String, phoneNumber: String): user
+    createUser(username: String, password: String, phoneNumber: String): [user]
     createNamespace(name: String, title: String): nameSpace
     createRoom(name: String, title: String, endPoint: String, description: String): room
     addUserInRoom(username: String, endPoint: String): user

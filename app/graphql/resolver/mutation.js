@@ -35,7 +35,7 @@ export const Mutation = {
       token,
       refreshToken,
     });
-    return user;
+    return [user];
   },
   createNamespace: async (_, arg) => {
     console.log(arg);
