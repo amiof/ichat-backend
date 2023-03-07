@@ -15,6 +15,7 @@ import { allroutes } from "./routes/routes.js";
 import createHttpError from "http-errors";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.js";
 import { connected } from "process";
+import { ws } from "./utils/socketinit.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -85,12 +86,13 @@ class application {
         },
         serveClient: true,
       });
-      io.on("connection", (socket) => {
-        console.log(`⚡: ${socket.id} user just connected!`);
-        socket.on("disconnect", () => {
-          console.log("🔥: A user disconnected");
-        });
-      });
+      ws(io);
+      // io.on("connection", (socket) => {
+      //   console.log(`⚡: ${socket.id} user just connected!`);
+      //   socket.on("disconnect", () => {
+      //     console.log("🔥: A user disconnected");
+      //   });
+      // });
     } catch (error) {}
   }
   router() {
