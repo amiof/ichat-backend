@@ -2,7 +2,7 @@ import { log } from "console";
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import express from "express";
-// import http from "http";
+import http from "http";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
@@ -14,6 +14,7 @@ import { Server } from "socket.io";
 import { allroutes } from "./routes/routes.js";
 import createHttpError from "http-errors";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.js";
+import { connected } from "process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -27,7 +28,7 @@ class application {
     this.serverConfig();
     this.apolloServerCreate();
     this.createServer(this.#port);
-    this.creatSoketIoServer();
+    // this.creatSoketIoServer();
     this.DataBaseConnect(this.#address);
     this.router();
     // this.errorHandler();
@@ -67,19 +68,28 @@ class application {
         if (!error) return log("server is up in http://localhost:3500");
         return log(error);
       });
-      return server;
+      // const server = http.createServer(app).listen(port, (error) => {
+      //   if (!error) return console.log("server is up in port 3500");
+      //   console.log(error);
+      // });
+      this.creatSoketIoServer(server);
     } catch (error) {
       log(error);
     }
   }
-  creatSoketIoServer() {
+  creatSoketIoServer(server) {
     try {
-      const server = this.createServer();
       const io = new Server(server, {
         cors: {
           origin: "*",
         },
         serveClient: true,
+      });
+      io.on("connection", (socket) => {
+        console.log(`⚡: ${socket.id} user just connected!`);
+        socket.on("disconnect", () => {
+          console.log("🔥: A user disconnected");
+        });
       });
     } catch (error) {}
   }
