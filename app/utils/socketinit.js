@@ -1,3 +1,5 @@
+import { saveMessage } from "./utilsSocketIO.js";
+import util from "util";
 class socketHandler {
   #io;
   constructor(io) {
@@ -6,9 +8,10 @@ class socketHandler {
   socketInit(io) {
     this.#io.on("connection", (socket) => {
       console.log(`⚡: ${socket.id} user just connected!`);
-      console.log(`${socket}`);
+      // console.log(`${socket}`);
       socket.on("message", (msg) => {
-        console.log();
+        saveMessage(msg[0], msg[1], msg[2]);
+        console.log(util.inspect(msg, true, null, true));
       });
       socket.on("disconnect", () => {
         console.log("🔥: A user disconnected");

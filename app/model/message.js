@@ -4,6 +4,7 @@ const messageSchema = new mongoose.Schema(
   {
     sender: { type: mongoose.Types.ObjectId, required: true },
     message: { type: String, required: true },
+    endPoint: { type: String, required: true },
     // dateTime: { type: String, required: true },
   },
   { timestamps: true }
