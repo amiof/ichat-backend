@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
     namespace: { type: [namespaceSchema], default: [] },
     token: { type: String, default: "" },
     refreshToken: { type: String, default: "" },
+    socketioID: { type: String, default: "" },
   },
   { timestamps: true }
 );
