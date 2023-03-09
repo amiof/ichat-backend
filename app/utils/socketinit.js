@@ -7,7 +7,9 @@ class socketHandler {
     this.#io.on("connection", (socket) => {
       console.log(`⚡: ${socket.id} user just connected!`);
       console.log(`${socket}`);
-
+      socket.on("message", (msg) => {
+        console.log();
+      });
       socket.on("disconnect", () => {
         console.log("🔥: A user disconnected");
       });
