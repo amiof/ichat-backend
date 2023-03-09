@@ -9,14 +9,18 @@ async function saveMessage(userId, endPoint, message) {
   );
   const messages = await messageModel.create({ sender: userId, message, endPoint });
 
-  console.log(room);
+  // console.log(room);
   // room.message({ sender: username, message: message });
 }
-
 async function saveSocketId(userId, socketId) {
-  const user = await userModel.findOneAndUpdate({ id: userId }, { $set: { socketioId: socketId } });
+  const user = await userModel.findOneAndUpdate(
+    { _id: userId.toString() },
+    { $set: { socketioID: socketId } }
+  );
+  console.log(user, socketId);
   if (user) {
     return user;
+    console.log(user);
   }
   return false;
   // user.socketioId.save(socketId);
