@@ -9,7 +9,7 @@ export let Query = {
     if (arg) {
       const { password } = arg;
       const user = await userModel.find({ ...arg });
-      console.log(user);
+      // console.log(user);
       return user;
     }
     const users = await userModel.find({});
