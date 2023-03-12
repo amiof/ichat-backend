@@ -10,7 +10,7 @@ class socketHandler {
       console.log(`⚡: ${socket.id} user just connected!`);
       // console.log(`${socket}`);
       socket.on("message", (msg) => {
-        saveMessage(msg[0], msg[1], msg[2]);
+        saveMessage(msg[0], msg[1], msg[2], socket);
         // console.log(util.inspect(msg, true, null, true));
       });
 
