@@ -7,6 +7,7 @@ const typeDefs = gql`
     nameSpaces(id: ID, name: String): [nameSpace]
     rooms(id: ID, name: String, endPoint: String): [room]
     users(username: String, id: ID, phoneNumber: String, password: String): [user]
+    login(username: String, password: String): [user]
   }
   type nameSpace {
     id: ID
