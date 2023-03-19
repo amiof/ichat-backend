@@ -50,6 +50,7 @@ export const Mutation = {
   },
   addUserInRoom: async (_, arg) => {
     const { username, endPoint } = arg;
+    console.log(username, endPoint);
     const checkUsername = await checkAvailableInDataBase({ username }, userModel);
     const checkEndPoint = await checkAvailableInDataBase({ endPoint }, roomModel);
     const checkAddedBefore = await userModel.find({
