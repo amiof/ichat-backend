@@ -50,9 +50,10 @@ export const Mutation = {
   },
   addUserInRoom: async (_, arg) => {
     const { username, endPoint } = arg;
-    console.log(username, endPoint);
+    // console.log(username, endPoint);
     const checkUsername = await checkAvailableInDataBase({ username }, userModel);
     const checkEndPoint = await checkAvailableInDataBase({ endPoint }, roomModel);
+    // console.log(checkEndPoint, checkUsername);
     const checkAddedBefore = await userModel.find({
       username,
       rooms: { $elemMatch: { endPoint } },
@@ -60,7 +61,8 @@ export const Mutation = {
     if (checkAddedBefore.length > 0) {
       return new GraphQLError("this user before added to this room");
     }
-    if (checkUsername && checkEndPoint) {
+    if (checkUsername && checkEndPoint.length) {
+      // console.log("in if");
       const test = checkUsername[0].rooms[0]?.name
         ? [...checkUsername[0].rooms, ...checkEndPoint]
         : checkEndPoint;
