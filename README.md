@@ -3,16 +3,28 @@ ichat-backend
 </h1>
 
 <p align="center">
-  <a href="https://www.javascript.com/">
+  <a href="">
     <img
-      alt="javaScript"
-      src="https://img.shields.io/badge/javaScript-%2357A143.svg?&style=for-the-badge&logo=JavaScript&logoColor=white"
+      alt="node.js"
+      src="https://img.shields.io/badge/nodejs-%2357A143.svg?&style=for-the-badge&logo=Node.js&logoColor=white"
     />
   </a>
-  <a href="https://react.dev/">
+  <a href="">
     <img
-      alt="reactjs"
-      src="https://img.shields.io/badge/ReactJs-blue.svg?&style=for-the-badge&logo=React&logoColor=white"
+      alt="express"
+      src="https://img.shields.io/badge/express-blue.svg?&style=for-the-badge&logo=Express&logoColor=white"
+    />
+  </a>
+    <a href="">
+    <img
+      alt="graphql"
+      src="https://img.shields.io/badge/graphql-red.svg?&style=for-the-badge&logo=graphql&logoColor=white"
+    />
+  </a>
+    <a href="">
+    <img
+      alt="socket.io"
+      src="https://img.shields.io/badge/socket.io-yellow.svg?&style=for-the-badge&logo=Socket.io&logoColor=white"
     />
   </a>
 </p>
